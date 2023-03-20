@@ -55,12 +55,12 @@ main img {
 
 h2 {
     color: rgb(29, 51, 100);
-    position: relative;
-    left: 8px;
+    margin: 5px;
 }
 
 p {
     color: gray;
+    margin: 0;
 }
 
 .left, .right {
