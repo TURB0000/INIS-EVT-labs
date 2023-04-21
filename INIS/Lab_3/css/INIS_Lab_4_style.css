@@ -1,0 +1,52 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+img {
+    border-radius: 25px;
+}
+
+button {
+    height: 40px;
+    font-size: medium;
+    border-radius: 8px;
+    border: solid 3px rgb(29, 51, 100);
+    margin: 5px 0px 5px 5px;
+    background-color: rgb(29, 51, 100);
+    color:white;
+}
+
+p {
+    display: inline-block;
+    color: gray;
+}
+
+.infoDivLeft, .buttons, h1, h2, h5 {
+    margin-left: 10px;
+}
+
+h1, h2, h5 {
+    color: rgb(29, 51, 100);
+}
+
+@media (min-width: 910px){
+    body {
+        display: grid;
+        grid-template-areas:
+          "one one"
+          "two three"
+    }
+    
+    h1 {
+        grid-area: one;
+    }
+    
+    .infoDivLeft {
+        grid-area: two;
+    }
+    
+    .infoDivRight {
+        grid-area: three;
+    }
+}
