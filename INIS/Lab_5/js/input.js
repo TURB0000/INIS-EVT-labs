@@ -75,39 +75,33 @@ document.getElementById(`workspace`).addEventListener(`dblclick`, function(e) {
 });
 
 document.getElementById(`workspace`).addEventListener(`touchstart`, function(e) {
-  console.log(`ts`);
-});
+  if (e.targetTouches.length == 1) {
+    let touch=e.targetTouches[0];
 
-document.getElementById(`workspace`).addEventListener(`touchend`, function(e) {
-  console.log(`tend`);
+    let elem = touch.target.closest(`.target`);
 
-  let lastTouch = new Date().valueOf();
-  if (lastTouch - previousTouch < 500 /*&& e.targetTouches.length == 1*/) {
-    console.log(`bind`);
-    let touch = e.touches.item(0);
-    //let elem = touch.target.closest(`.target`);
-    let elem = document.elementFromPoint(touch.pageX, touch.pageY);
+    if (!elem) return; 
 
-    if (!elem) return;
+    if (dragging == true){
+      return;
+    }
 
     dragging = true;
 
     element = elem;
-
-    console.log(`bind`);
 
     startX = touch.pageX - Number.parseInt(element.style.left || 0);
     startXDoc = Number.parseInt(element.style.left || 0);
     startY = touch.pageY - Number.parseInt(element.style.top || 0);
     startYDoc = Number.parseInt(element.style.top || 0);
   }
+});
 
-  previousTouch = lastTouch;
+document.getElementById(`workspace`).addEventListener(`touchend`, function(e) {
+  dragging = false;
 });
 
 document.getElementById(`workspace`).addEventListener(`touchmove`, function(e) {
-  console.log(`tm`);
-
   if (!dragging || e.targetTouches.length != 1) return;
 
   let touch = e.targetTouches[0];
