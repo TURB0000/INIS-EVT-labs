@@ -10,8 +10,6 @@ let startYDoc = 0;
 
 let startStyle = ``;
 
-let previousTouch = new Date().valueOf();
-
 document.getElementById(`workspace`).addEventListener(`mousedown`, function(e) {
   if (e.which != 1) {
     return;
@@ -72,40 +70,4 @@ document.getElementById(`workspace`).addEventListener(`dblclick`, function(e) {
   startStyle = element.style.backgroundColor;
 
   element.style.backgroundColor = `green`;
-});
-
-document.getElementById(`workspace`).addEventListener(`touchstart`, function(e) {
-  if (e.targetTouches.length == 1) {
-    let touch=e.targetTouches[0];
-
-    let elem = touch.target.closest(`.target`);
-
-    if (!elem) return; 
-
-    if (dragging == true){
-      return;
-    }
-
-    dragging = true;
-
-    element = elem;
-
-    startX = touch.pageX - Number.parseInt(element.style.left || 0);
-    startXDoc = Number.parseInt(element.style.left || 0);
-    startY = touch.pageY - Number.parseInt(element.style.top || 0);
-    startYDoc = Number.parseInt(element.style.top || 0);
-  }
-});
-
-document.getElementById(`workspace`).addEventListener(`touchend`, function(e) {
-  dragging = false;
-});
-
-document.getElementById(`workspace`).addEventListener(`touchmove`, function(e) {
-  if (!dragging || e.targetTouches.length != 1) return;
-
-  let touch = e.targetTouches[0];
-
-  element.style.top = `${touch.pageY - startY}px`;
-  element.style.left = `${touch.pageX - startX}px`; 
 });
