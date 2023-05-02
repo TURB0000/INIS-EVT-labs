@@ -1,6 +1,7 @@
 let element = document.querySelector(`.target`);
 
 let dragging = false;
+let moveStart = false;
 
 let startX = 0;
 let startY = 0;
@@ -11,8 +12,9 @@ let startYDoc = 0;
 let previousTouch = new Date().valueOf();
 
 document.getElementById(`workspace`).addEventListener(`touchstart`, function(e) {
-  if (e.targetTouches.length != 1 && dragging == true) {
+  if (e.targetTouches.length > 1 && dragging == true) {
     dragging = false;
+    moveStart = false;
     element.style.top = `${startYDoc}px`;
     element.style.left = `${startXDoc}px`;
     return;
@@ -25,13 +27,14 @@ document.getElementById(`workspace`).addEventListener(`touchstart`, function(e) 
 
     let elem = touch.target.closest(`.target`);
 
-    if (!elem) return; 
+    if (!elem) return;
 
     if (dragging == true){
       return;
     }
 
     dragging = true;
+    moveStart = true;
 
     element = elem;
 
@@ -45,6 +48,11 @@ document.getElementById(`workspace`).addEventListener(`touchstart`, function(e) 
 });
 
 document.getElementById(`workspace`).addEventListener(`touchend`, function(e) {
+  if (moveStart == true){
+    moveStart = false;
+    return;
+  }
+
   let currentTouch = new Date().valueOf();
 
   if (currentTouch - previousTouch < 250) {
