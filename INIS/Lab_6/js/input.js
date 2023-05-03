@@ -16,6 +16,7 @@ document.getElementById(`workspace`).addEventListener(`touchstart`, function(e) 
   if (e.targetTouches.length > 1 && dragging == true) {
     dragging = false;
     follow = false;
+    followStart = false;
     element.style.top = `${startYDoc}px`;
     element.style.left = `${startXDoc}px`;
     return;
