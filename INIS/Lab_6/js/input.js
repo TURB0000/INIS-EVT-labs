@@ -1,7 +1,8 @@
 let element = document.querySelector(`.target`);
 
 let dragging = false;
-let moveStart = false;
+let follow = false;
+let followStart = false;
 
 let startX = 0;
 let startY = 0;
@@ -14,7 +15,7 @@ let previousTouch = new Date().valueOf();
 document.getElementById(`workspace`).addEventListener(`touchstart`, function(e) {
   if (e.targetTouches.length > 1 && dragging == true) {
     dragging = false;
-    moveStart = false;
+    follow = false;
     element.style.top = `${startYDoc}px`;
     element.style.left = `${startXDoc}px`;
     return;
@@ -22,19 +23,18 @@ document.getElementById(`workspace`).addEventListener(`touchstart`, function(e) 
 
   let currentTouch = new Date().valueOf();
 
-  if (e.targetTouches.length == 1 && currentTouch - previousTouch < 500) {
+  if (e.targetTouches.length == 1 && dragging == false) {
     let touch=e.targetTouches[0];
 
     let elem = touch.target.closest(`.target`);
 
     if (!elem) return;
 
-    if (dragging == true){
-      return;
-    }
-
     dragging = true;
-    moveStart = true;
+    if (currentTouch - previousTouch < 500) {
+      follow = true;
+      followStart = true;
+    }
 
     element = elem;
 
@@ -48,23 +48,27 @@ document.getElementById(`workspace`).addEventListener(`touchstart`, function(e) 
 });
 
 document.getElementById(`workspace`).addEventListener(`touchend`, function(e) {
-  if (moveStart == true){
-    moveStart = false;
-    return;
-  }
+  if(dragging == true) {
+    let currentTouch = new Date().valueOf();
 
-  let currentTouch = new Date().valueOf();
-
-  if (currentTouch - previousTouch < 250) {
-    dragging = false;
+    if (currentTouch - previousTouch < 250 && follow == true && followStart == false) {
+      dragging = false;
+      follow = false;
+    }
+    if (followStart == true) {
+      followStart = false;
+    }
+    if (follow == false) {
+      dragging = false;
+    }
   }
 });
 
 document.getElementById(`workspace`).addEventListener(`touchmove`, function(e) {
-  if (!dragging) return;
+  if (e.targetTouches.length == 1 && dragging == true) {
+    let touch = e.targetTouches[0];
 
-  let touch = e.targetTouches[0];
-
-  element.style.top = `${touch.pageY - startY}px`;
-  element.style.left = `${touch.pageX - startX}px`; 
+    element.style.top = `${touch.pageY - startY}px`;
+    element.style.left = `${touch.pageX - startX}px`;
+  }
 });
