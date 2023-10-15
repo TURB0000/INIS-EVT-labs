@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paint</title>
+    <link rel="icon" type="image/x-icon" href="../images/favicon.png">
+    <link rel="stylesheet" href="../style/style.css">
+    <script src="../js/script.js"></script>
+</head>
+<body>
+    <datalist id="presetColors">
+        <option value="#ff0000">
+        <option value="#ffa500">
+        <option value="#ffff00">
+        <option value="#00ff00">
+        <option value="#00ffff">
+        <option value="#0000ff">
+        <option value="#ff00ff">
+        <option value="#000000">
+        <option value="#aaaaaa">
+        <option value="#ffffff">
+    </datalist>
+    <div class="settings">
+        <fieldset>
+            <legend>Толщина линии</legend>
+            <label>
+                <input type="range" min="1" max="50" value="1" oninput="lineSizePic(this.value)">
+            </label>
+        </fieldset>
+        <fieldset>
+            <label>
+                Цвет линии:
+                <input type="color" list="presetColors" oninput="borderColorPic(this.value)">
+            </label>
+            <label style="display: block;">
+                Прозрачность:
+                <input type="range" min="0" max="255" step="1" value="255" oninput="borderOpacityPic(this.value)">
+            </label>
+        </fieldset>
+        <fieldset>
+            <label>
+                Цвет заливки:
+                <input type="color" list="presetColors" oninput="fillColorPic(this.value)">
+            </label>
+            <label style="display: block;">
+                Прозрачность:
+                <input type="range" min="0" max="255" step="1" value="255" oninput="fillOpacityPic(this.value)">
+            </label>
+        </fieldset>
+        <fieldset>
+            <legend>Инструмент</legend>
+            <label>
+                <input type="radio" name="tool" value="cursor" oninput="changeTool(this.value)">
+                <img src="../images/cursor.png" alt="Cursor">
+            </label>
+            <label>
+                <input type="radio" name="tool" value="pen" oninput="changeTool(this.value)">
+                <img src="../images/pen.png" alt="Pen">
+            </label>             
+            <label>
+                <input type="radio" name="tool" value="ellipse" oninput="changeTool(this.value)">
+                <img src="../images/circle.svg" alt="Ellipse">
+            </label>
+            <label>
+                <input type="radio" name="tool" value="rectangle" oninput="changeTool(this.value)">
+                <img src="../images/square.svg" alt="Rectangle">
+            </label>
+            <label>
+                <input type="radio" name="tool" value="line" oninput="changeTool(this.value)">
+                <img src="../images/line.svg" alt="Line">
+            </label>
+            <label>
+                <input type="radio" name="tool" value="fill" oninput="changeTool(this.value)">
+                <img src="../images/fill.png" alt="Fill">
+            </label>
+        </fieldset>
+        <fieldset>
+            <legend>Слои</legend>
+            <label>
+                <input type="checkbox" name="layers" value="canvas" checked oninput="changeLayer(this.value)">
+                Canvas
+            </label>             
+            <label style="display: block;">
+                <input type="checkbox" name="layers" value="svg" checked oninput="changeLayer(this.value)">
+                SVG
+            </label>
+        </fieldset>
+        <button type="button" onclick="eraseAll()">
+            <img src="../images/eraser.png" alt="Erase">
+        </button>
+    </div>
+    <div id="penTracker">
+        <div>
+            <svg id="svg" style="visibility: visible;"></svg>
+            <canvas id="canvas" style="visibility: visible;"></canvas>
+        </div>
+    </div>
+</body>
+</html>
