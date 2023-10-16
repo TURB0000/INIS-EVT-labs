@@ -42,7 +42,7 @@ function fillOpacityPic(value) {
     if(selectedSvgElement && selectedSvgElement.getAttribute("fill") != "none") selectedSvgElement.setAttribute("fill", context.fillStyle);
 }
 
-var currentTool;
+var currentTool = function(){}
 
 function changeTool(value) {
     switch (value) {
@@ -101,7 +101,7 @@ const xmlns = "http://www.w3.org/2000/svg";
 var penTracker = document.getElementById("penTracker");
 var svg = document.getElementById("svg");
 var canvas = document.getElementById("canvas");
-var context = canvas.getContext("2d");
+var context = canvas.getContext('2d', { willReadFrequently: true });
 
 canvas.setAttribute('width', window.innerWidth - 2 * canvas.offsetLeft + penTracker.offsetLeft);
 canvas.setAttribute('height', window.innerHeight - 2 * canvas.offsetTop + penTracker.offsetTop);
