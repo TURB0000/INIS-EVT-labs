@@ -7,7 +7,7 @@
     <title>Paint</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.png">
     <link rel="stylesheet" href="../style/style.css">
-    <script src="../js/script.js"></script>
+    <script src="../js/script.js" defer></script>
 </head>
 <body>
     <datalist id="presetColors">
@@ -75,6 +75,7 @@
                 <input type="radio" name="tool" value="fill" oninput="changeTool(this.value)">
                 <img src="../images/fill.png" alt="Fill">
             </label>
+            <img src="../images/eraser.png" alt="Erase" onpointerdown="eraseAll()">
         </fieldset>
         <fieldset>
             <legend>Слои</legend>
@@ -87,9 +88,6 @@
                 SVG
             </label>
         </fieldset>
-        <button type="button" onclick="eraseAll()">
-            <img src="../images/eraser.png" alt="Erase">
-        </button>
     </div>
     <div id="penTracker">
         <div>
