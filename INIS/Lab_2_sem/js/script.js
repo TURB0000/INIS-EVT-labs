@@ -129,7 +129,7 @@ var startTranslateY;
 function unselectSvgElement(){
     if(selectedSvgElement){
         selectedSvgElement.classList.remove("selectedSvgFigure");
-        selectedSvgElement == null;
+        selectedSvgElement = null;
         dragging = false;
     }
 }
@@ -141,7 +141,7 @@ document.addEventListener(`keydown`, function(e) {
     } else if (selectedSvgElement && e.code == `Delete`) {
         dragging = false;
         selectedSvgElement.remove();
-        selectedSvgElement == null;
+        selectedSvgElement = null;
     }
 });
 

@@ -71,19 +71,21 @@ fieldset img:active {
 
 @keyframes blink {
     0% {
-        opacity: 1;
+        outline-color: rgba(100, 100, 100, 0);
     }
     20% {
-        opacity: 0.5;
+        outline-color: rgba(100, 100, 100, 1);
     }
     40% {
-        opacity: 1;
+        outline-color: rgba(100, 100, 100, 0);
     }
     100% {
-        opacity: 1;
+        outline-color: rgba(100, 100, 100, 0);
     }
 }
 
 .selectedSvgFigure {
     animation: blink 1s infinite;
+    outline: 4px dashed #333;
+    outline-offset: 4px;
 }
